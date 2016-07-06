@@ -1,0 +1,570 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="鸿蒙记,游戏开发," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="《鸿蒙记》初步定位于一款Html5版本的交互式漫画，为了更好的宣传漫画里面的角色，让读者在接触到正式的漫画以前，对漫画中的主要角色有一定的认识，项目组决定先提前做一款以角色宣传为主的小游戏，虽然是一款小游戏，但为了更好的总结游戏的开发流程，便在这里简单的记录一下游戏的开发历程。
+游戏开发难点技术上的难点其实本作品的初衷就是一个小游戏，游戏机制十分简单，就是对玩家触摸时间的判断，以触摸时间的不同来触">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《鸿蒙记》小游戏开发小记">
+<meta property="og:url" content="http://yoursite.com/2016/03/22/《鸿蒙记》小游戏开发小记/index.html">
+<meta property="og:site_name" content="Leemo的写字空间">
+<meta property="og:description" content="《鸿蒙记》初步定位于一款Html5版本的交互式漫画，为了更好的宣传漫画里面的角色，让读者在接触到正式的漫画以前，对漫画中的主要角色有一定的认识，项目组决定先提前做一款以角色宣传为主的小游戏，虽然是一款小游戏，但为了更好的总结游戏的开发流程，便在这里简单的记录一下游戏的开发历程。
+游戏开发难点技术上的难点其实本作品的初衷就是一个小游戏，游戏机制十分简单，就是对玩家触摸时间的判断，以触摸时间的不同来触">
+<meta property="og:updated_time" content="2016-05-27T12:33:03.112Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《鸿蒙记》小游戏开发小记">
+<meta name="twitter:description" content="《鸿蒙记》初步定位于一款Html5版本的交互式漫画，为了更好的宣传漫画里面的角色，让读者在接触到正式的漫画以前，对漫画中的主要角色有一定的认识，项目组决定先提前做一款以角色宣传为主的小游戏，虽然是一款小游戏，但为了更好的总结游戏的开发流程，便在这里简单的记录一下游戏的开发历程。
+游戏开发难点技术上的难点其实本作品的初衷就是一个小游戏，游戏机制十分简单，就是对玩家触摸时间的判断，以触摸时间的不同来触">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 《鸿蒙记》小游戏开发小记 | Leemo的写字空间 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Leemo的写字空间</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">聊聊人生，谈谈梦想</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《鸿蒙记》小游戏开发小记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-03-22T00:00:00+08:00" content="2016-03-22">
+              2016-03-22
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>《鸿蒙记》初步定位于一款Html5版本的交互式漫画，为了更好的宣传漫画里面的角色，让读者在接触到正式的漫画以前，对漫画中的主要角色有一定的认识，项目组决定先提前做一款以角色宣传为主的小游戏，虽然是一款小游戏，但为了更好的总结游戏的开发流程，便在这里简单的记录一下游戏的开发历程。</p>
+<h2 id="游戏开发难点"><a href="#游戏开发难点" class="headerlink" title="游戏开发难点"></a>游戏开发难点</h2><h3 id="技术上的难点"><a href="#技术上的难点" class="headerlink" title="技术上的难点"></a>技术上的难点</h3><p>其实本作品的初衷就是一个小游戏，游戏机制十分简单，就是对玩家触摸时间的判断，以触摸时间的不同来触发不同的事件，因此，就游戏逻辑和技术内容来说，这个游戏的开发难度可谓是非常简单，没有什么技术上的难点，所谓技术上的难点其实只集中在两个方面：新游戏引擎Egret和新的编程语言TypeScript使用。</p>
+<h4 id="Egret引擎"><a href="#Egret引擎" class="headerlink" title="Egret引擎"></a>Egret引擎</h4><p>Egret引擎几乎是一夜之间被大家所熟知，这里面的功劳大多要归功于《围住神经猫》这款朋友圈游戏的火热，大多数开发着通过这款游戏，间接性的了解了Egret游戏引擎，从而也带动了Egret引擎的使用。  </p>
+<p>虽然Egret引擎真正被大家所熟知并没有多长时间，但它的开发团队是来自大家都非常熟悉的Adobe Flash软件的开发团队，其技术总监马鉴是前Adobe Flash的技术负责人。也正是以此为背景，Egret对来自AS3.0的游戏开发者非常友好，无论是MovieClip还是API的设计与调用，都与Flash中的游戏开发非常相似。  </p>
+<p>但仅凭此，Egret似乎也并不能取得当前在Html5游戏开发中的地位，我认为Egret能够在Html5游戏开发中取得今天的位置，固然有其技术方面上的优势，更多的还是其工作流的成熟，Egret从设计到程序，除了没有相应的绘图软件之外，几乎提供了全部工作所需的工具，相互之间的数据导入导出非常方便。如果单纯开发Html5游戏来讲，几乎不需要其他的非绘图工具。</p>
+<h4 id="TypeScript编程语言"><a href="#TypeScript编程语言" class="headerlink" title="TypeScript编程语言"></a>TypeScript编程语言</h4><p>对于这门语言，由于目前连初学者都算不上，只是大致熟悉了下简单的语法就上手写了，因此不敢在这里对这门语言妄自非议。只能简单来说下使用感受，由于这门语言的开发者是C#之父安德斯·海尔斯伯格（Anders Hejlsberg,1960.12-），因此虽然TypeScript是JavaScript的超集，且是ECMAScript6的实现，但写起来非常舒服，和C#也非常类似，只是目前使用这门语言的开发者并不多，国内也没有相对成熟的技术氛围，一些问题很难找到答案，也没有多少人可以咨询或求教。不过，随着Anjulas.js2.0宣布使用TypeScript开发后，可能国内的生态会更好，更成熟一些。</p>
+<h2 id="游戏设计上的难点"><a href="#游戏设计上的难点" class="headerlink" title="游戏设计上的难点"></a>游戏设计上的难点</h2><p>现在的我还没有足够的学识去探讨游戏该怎样去设计，但是，我现在已然明白一个问题，越简单的游戏越难以设计。  </p>
+<p>游戏越简单，你所能操控的元素就越少，可操控的元素越少，也就越难以从这些有限的条件中去进行相关的设计。我也并不是没有看过有关游戏设计上的一些书籍，更何况我本身也算是一个伪资深的游戏迷，但是，真正到了让你围绕一个核心的游戏机制，去做出一个让大部分人喜欢玩且愿意玩的游戏，实在是感觉太难了，这并不是随意的让你天马行空。当你真正要去做一款游戏的时候，你会发现，你的想法往往会受限制于游戏机制、游戏所要承载的功能以及技术上的实现难度和开发周期，也就是说，往往游戏设计师是在带着镣铐跳舞。因此，我突然间就明白了为什么那么多游戏公司选择抄袭游戏，一个规模较大的游戏，如果完全建立在一个全新的创意上，它所冒的风险是巨大的，因为你不知道玩家面对你创意的感受是怎样的，相比那些已经被市场和玩家接受了的游戏玩法和类型，后者无疑是稳妥的商业模式，但是，话说回来，太多的稳妥或许也就意味着平庸，抄的多了，即便已经积累起了资本恐怕也没有那份初心来去探索更好的游戏机制或模式了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/鸿蒙记/" rel="tag">#鸿蒙记</a>
+          
+            <a href="/tags/游戏开发/" rel="tag">#游戏开发</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/12/游戏中的恐怖谷理论/" rel="next" title="游戏中的恐怖谷理论">
+                <i class="fa fa-chevron-left"></i> 游戏中的恐怖谷理论
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/24/《鸿蒙记》小游戏开发总结（一）/" rel="prev" title="《鸿蒙记》小游戏开发总结（一）">
+                《鸿蒙记》小游戏开发总结（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Leemo" />
+          <p class="site-author-name" itemprop="name">Leemo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#游戏开发难点"><span class="nav-number">1.</span> <span class="nav-text">游戏开发难点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#技术上的难点"><span class="nav-number">1.1.</span> <span class="nav-text">技术上的难点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Egret引擎"><span class="nav-number">1.1.1.</span> <span class="nav-text">Egret引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TypeScript编程语言"><span class="nav-number">1.1.2.</span> <span class="nav-text">TypeScript编程语言</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游戏设计上的难点"><span class="nav-number">2.</span> <span class="nav-text">游戏设计上的难点</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leemo</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

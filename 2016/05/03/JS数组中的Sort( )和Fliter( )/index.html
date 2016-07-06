@@ -1,0 +1,581 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript,编程相关," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最近发现自己对数组的使用可以说是相当不了解，很奇怪，按道理说，数组应该是最常用的一个类型了，很用来用去，发现还是了解的太少了。前两天看百度IFE，有这么一个问题：给你如下的数组，让你找出数值大于60的城市，并按由大到小的顺序输出。   
+12345678var aqiData = [    [&quot;北京&quot;, 90],    [&quot;上海&quot;, 50],    [&quot;福州&quot;, 10],    [&quot;广州&quot;, 50">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS数组中的Sort( )和Fliter( )">
+<meta property="og:url" content="http://yoursite.com/2016/05/03/JS数组中的Sort( )和Fliter( )/index.html">
+<meta property="og:site_name" content="Leemo的写字空间">
+<meta property="og:description" content="最近发现自己对数组的使用可以说是相当不了解，很奇怪，按道理说，数组应该是最常用的一个类型了，很用来用去，发现还是了解的太少了。前两天看百度IFE，有这么一个问题：给你如下的数组，让你找出数值大于60的城市，并按由大到小的顺序输出。   
+12345678var aqiData = [    [&quot;北京&quot;, 90],    [&quot;上海&quot;, 50],    [&quot;福州&quot;, 10],    [&quot;广州&quot;, 50">
+<meta property="og:updated_time" content="2016-05-27T13:00:06.391Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS数组中的Sort( )和Fliter( )">
+<meta name="twitter:description" content="最近发现自己对数组的使用可以说是相当不了解，很奇怪，按道理说，数组应该是最常用的一个类型了，很用来用去，发现还是了解的太少了。前两天看百度IFE，有这么一个问题：给你如下的数组，让你找出数值大于60的城市，并按由大到小的顺序输出。   
+12345678var aqiData = [    [&quot;北京&quot;, 90],    [&quot;上海&quot;, 50],    [&quot;福州&quot;, 10],    [&quot;广州&quot;, 50">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> JS数组中的Sort( )和Fliter( ) | Leemo的写字空间 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Leemo的写字空间</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">聊聊人生，谈谈梦想</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JS数组中的Sort( )和Fliter( )
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-05-03T00:00:00+08:00" content="2016-05-03">
+              2016-05-03
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近发现自己对数组的使用可以说是相当不了解，很奇怪，按道理说，数组应该是最常用的一个类型了，很用来用去，发现还是了解的太少了。<br>前两天看百度IFE，有这么一个问题：给你如下的数组，让你找出数值大于60的城市，并按由大到小的顺序输出。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> aqiData = [</div><div class="line">    [<span class="string">"北京"</span>, <span class="number">90</span>],</div><div class="line">    [<span class="string">"上海"</span>, <span class="number">50</span>],</div><div class="line">    [<span class="string">"福州"</span>, <span class="number">10</span>],</div><div class="line">    [<span class="string">"广州"</span>, <span class="number">50</span>],</div><div class="line">    [<span class="string">"成都"</span>, <span class="number">90</span>],</div><div class="line">    [<span class="string">"西安"</span>, <span class="number">100</span>]</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>  一般思路就是遍历数组，取大于60的值，存入新数组，排序，输出，后来看到这一个解法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> chineseNumbers = [<span class="string">"一"</span>,<span class="string">"二"</span>,<span class="string">"三"</span>,<span class="string">"四"</span>,<span class="string">"五"</span>,<span class="string">"六"</span>,<span class="string">"七"</span>,<span class="string">"八"</span>,<span class="string">"九"</span>,<span class="string">"十"</span>];</div><div class="line"><span class="keyword">var</span> contentStr = <span class="string">""</span>;</div><div class="line">aqiData.filter(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;<span class="keyword">return</span> i[<span class="number">1</span>] &gt; <span class="number">60</span>;&#125;)</div><div class="line">    .sort(<span class="function"><span class="keyword">function</span> (<span class="params">d1,d2</span>)</span>&#123; <span class="keyword">return</span> d2[<span class="number">1</span>] - d1[<span class="number">1</span>]; &#125;)</div><div class="line">    .forEach(<span class="function"><span class="keyword">function</span> (<span class="params">element,index</span>)</span>&#123;</div><div class="line">    contentStr += <span class="string">"&lt;li&gt;第"</span> + chineseNumbers[index] + <span class="string">"名："</span> + element[<span class="number">0</span>] + <span class="string">"，"</span> + element[<span class="number">1</span>] + <span class="string">"&lt;/li&gt;"</span>;</div><div class="line">    &#125;);</div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"aqi-list"</span>).innerHTML = contentStr;</div></pre></td></tr></table></figure></p>
+<p>这段写的挺有意思，它调用了三个方法<code>filter()</code>、<code>sort()</code>和<code>forEach()</code>。来看看这三个方法的功能吧：</p>
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter( )"></a>filter( )</h3><p><code>arr.filter(callback[, thisArg])</code>方法的作用为：对数组中的每一项运行给定函数，返回该函数会返回 true 的项组成的数组。 它会进行三步工作，运行函数，判断是否为true；是的话存入到返回数组中。</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>用来测试数组的每个元素的函数。调用时使用参数 (element, index, array)。返回true表示保留该元素（通过测试），false则不保留。 </p>
+<p>thisArg<br>可选。执行 callback 时的用于 this 的值</p>
+<p>callback 被调用时传入三个参数：</p>
+<ol>
+<li>元素的值</li>
+<li>元素的索引</li>
+<li>遍历的数组</li>
+</ol>
+<p>拿上面的代码来说：</p>
+<pre><code class="javascript">aqiData.filter(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>{<span class="keyword">return</span> i[<span class="number">1</span>] &gt; <span class="number">60</span>;})
+</code></pre>
+<p>其实就是一个数组，其中的参数i，代表着数组中的每一项，由于是数组嵌套，因此其后面加个索引1，即数值所在的位置，然后返回所有数值大于60的数组。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>需要注意的是，<code>filter( )</code>并不会改变原来数组的值，它会创建一个新的数组，且其所查找的值，在被调用之初已经确定了，即，如果在后面更改了原数组的值，如果不再次重新调用<code>filter( )</code>方法，那么原来得到的数组不会改变。</p>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort( )"></a>sort( )</h3><p>占个坑，以后来填</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/编程相关/" rel="tag">#编程相关</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/03/《鸿蒙记》小游戏开发总结（七）/" rel="next" title="《鸿蒙记》小游戏开发总结（七）">
+                <i class="fa fa-chevron-left"></i> 《鸿蒙记》小游戏开发总结（七）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/13/《鸿蒙记》小游戏开发总结（八）/" rel="prev" title="《鸿蒙记》小游戏开发总结（八）">
+                《鸿蒙记》小游戏开发总结（八） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Leemo" />
+          <p class="site-author-name" itemprop="name">Leemo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#filter"><span class="nav-number">1.</span> <span class="nav-text">filter( )</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数"><span class="nav-number">1.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">1.2.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">2.</span> <span class="nav-text">sort( )</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leemo</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

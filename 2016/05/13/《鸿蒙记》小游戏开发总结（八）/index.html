@@ -1,0 +1,577 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="鸿蒙记,游戏开发," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="阶段总结在写下这篇文字的时候，《鸿蒙记》的游戏开发已经进入尾声了，虽然经过了一些困难，但总体来讲，还是应该算是比较顺利的吧。  
+这段时间对游戏做了一个相对较大的优化，出了之前提到的图片素材外，对一些UI和结果的数值展示和结果判定也进行了一些修改。图片素材的修改主要集中在图片素材大小的压缩和一些场景图的替换，UI资源的话也是做了一些细节性的调整，力图让U和场景能更紧密一些。这一些主要是细节上的更改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《鸿蒙记》小游戏开发总结（八）">
+<meta property="og:url" content="http://yoursite.com/2016/05/13/《鸿蒙记》小游戏开发总结（八）/index.html">
+<meta property="og:site_name" content="Leemo的写字空间">
+<meta property="og:description" content="阶段总结在写下这篇文字的时候，《鸿蒙记》的游戏开发已经进入尾声了，虽然经过了一些困难，但总体来讲，还是应该算是比较顺利的吧。  
+这段时间对游戏做了一个相对较大的优化，出了之前提到的图片素材外，对一些UI和结果的数值展示和结果判定也进行了一些修改。图片素材的修改主要集中在图片素材大小的压缩和一些场景图的替换，UI资源的话也是做了一些细节性的调整，力图让U和场景能更紧密一些。这一些主要是细节上的更改">
+<meta property="og:updated_time" content="2016-05-27T12:28:12.571Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《鸿蒙记》小游戏开发总结（八）">
+<meta name="twitter:description" content="阶段总结在写下这篇文字的时候，《鸿蒙记》的游戏开发已经进入尾声了，虽然经过了一些困难，但总体来讲，还是应该算是比较顺利的吧。  
+这段时间对游戏做了一个相对较大的优化，出了之前提到的图片素材外，对一些UI和结果的数值展示和结果判定也进行了一些修改。图片素材的修改主要集中在图片素材大小的压缩和一些场景图的替换，UI资源的话也是做了一些细节性的调整，力图让U和场景能更紧密一些。这一些主要是细节上的更改">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 《鸿蒙记》小游戏开发总结（八） | Leemo的写字空间 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Leemo的写字空间</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">聊聊人生，谈谈梦想</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《鸿蒙记》小游戏开发总结（八）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-05-13T00:00:00+08:00" content="2016-05-13">
+              2016-05-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="阶段总结"><a href="#阶段总结" class="headerlink" title="阶段总结"></a>阶段总结</h3><p>在写下这篇文字的时候，《鸿蒙记》的游戏开发已经进入尾声了，虽然经过了一些困难，但总体来讲，还是应该算是比较顺利的吧。  </p>
+<p>这段时间对游戏做了一个相对较大的优化，出了之前提到的<strong>图片素材</strong>外，对一些<strong>UI</strong>和结果的<strong>数值展示</strong>和<strong>结果判定</strong>也进行了一些修改。图片素材的修改主要集中在图片素材大小的压缩和一些场景图的替换，UI资源的话也是做了一些细节性的调整，力图让U和场景能更紧密一些。这一些主要是细节上的更改，较大的更改体现在数值展示和结果判定上面。  </p>
+<p>对于休闲类以及类考察玩家反应快慢游戏，其很大的一部分魅力就在于结果的多元化。你的操作会带来不同的结果，大部分人的结果都会有些不同，这就带来了挑战，探索以及攀比元素，可以很大程度上增加游戏的可玩性。  </p>
+<p>但是对于《鸿蒙记》这款游戏来讲，由于是一个烹饪游戏，其结果是固定的，也就是烤的程度，你给玩家一个烤了5.7分熟这种提示是非常突兀也是不合适的。那么，如何在这个游戏中体验层次性和结果的多样性呢？  </p>
+<p>一开始的解决方案是非常偷懒的，先是划分了几个主要的结果层次，然后直接写死了百分比，也就是玩家只要按到相同的“几分熟”，展现给玩家的所有数据都是相同的。  </p>
+<p>后来我和师兄都觉的这样不妥，师兄提出的一个想法是，根据结果的层次，再随机一个数，然后算出百分比，这个随机数的作用就是让结果更为多元化。  </p>
+<p>但我仔细考虑了下，发现这样的判定其实是非常不妥的，因为是随机，玩家根本就无法发现自己在同一层次下如何提升成绩的可能性。这句话有点绕，但其实就是，假设玩家都到了一个层次，那么他如何来让自己在该层次中得到比别人更好的结果呢？放到游戏里，其实就是玩家都烤了七分熟，打败了全国xx%的玩家。如何在七分熟的前提下提升那个xx呢。如果加入随机数，这其实就是一个没有规律的问题，玩家一直在寻找规律，但发现没有规律之后，可能就会放弃挑战了。   </p>
+<p>然后我做的最后一个解决方案其实还是和时间有关，因为本质上，这也是一个比时间的游戏。方案采用了<strong>所用时间/游戏最佳时间</strong>来判断百分比，一方面，这也符合难度机制设定，另一方面，由于时间数据搜集到以毫秒记，也就是很大的概率你每次按住的时间是不同的（虽然烤的结果可能相同），这就提供了更多的游戏结果。同时由于越靠近游戏最佳时间，其数值越高也为玩家挑战提供了一个清晰的目标。  </p>
+<p>其实这个话题有很多展开性，这里暂作记录，挖坑待填。  </p>
+<h3 id="项目进度"><a href="#项目进度" class="headerlink" title="项目进度"></a>项目进度</h3><ul>
+<li>游戏整体已接近完成</li>
+</ul>
+<h3 id="TUDO"><a href="#TUDO" class="headerlink" title="TUDO"></a>TUDO</h3><ul>
+<li>游戏细节优化和上线细节</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/鸿蒙记/" rel="tag">#鸿蒙记</a>
+          
+            <a href="/tags/游戏开发/" rel="tag">#游戏开发</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/03/JS数组中的Sort( )和Fliter( )/" rel="next" title="JS数组中的Sort( )和Fliter( )">
+                <i class="fa fa-chevron-left"></i> JS数组中的Sort( )和Fliter( )
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/27/独立游戏的概念为什么越来越火/" rel="prev" title="独立游戏的概念为什么越来越火">
+                独立游戏的概念为什么越来越火 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Leemo" />
+          <p class="site-author-name" itemprop="name">Leemo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#阶段总结"><span class="nav-number">1.</span> <span class="nav-text">阶段总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目进度"><span class="nav-number">2.</span> <span class="nav-text">项目进度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TUDO"><span class="nav-number">3.</span> <span class="nav-text">TUDO</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leemo</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
